@@ -1,0 +1,13 @@
+use_frameworks!
+
+platform :ios, '10.0'
+
+target 'PKCS12_Example' do
+  pod 'PKCS12', :path => '../'
+
+  target 'PKCS12_Tests' do
+    inherit! :search_paths
+
+    
+  end
+end
