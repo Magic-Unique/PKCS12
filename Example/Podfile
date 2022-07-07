@@ -1,6 +1,5 @@
-use_frameworks!
 
-platform :ios, '10.0'
+platform :ios, '8.0'
 
 target 'PKCS12_Example' do
   pod 'PKCS12', :path => '../'

@@ -1,0 +1,25 @@
+PODS:
+  - OpenSSL-Universal (1.0.2.20):
+    - OpenSSL-Universal/Static (= 1.0.2.20)
+  - OpenSSL-Universal/Static (1.0.2.20)
+  - PKCS12 (0.1.0):
+    - OpenSSL-Universal
+
+DEPENDENCIES:
+  - PKCS12 (from `../`)
+
+SPEC REPOS:
+  trunk:
+    - OpenSSL-Universal
+
+EXTERNAL SOURCES:
+  PKCS12:
+    :path: "../"
+
+SPEC CHECKSUMS:
+  OpenSSL-Universal: ff34003318d5e1163e9529b08470708e389ffcdd
+  PKCS12: e1a3be3d1b5152a8bbe012c5cd1eaa565a93a702
+
+PODFILE CHECKSUM: 5e879b37d2b8fe85ffc7d83271db6a9b2d97afc0
+
+COCOAPODS: 1.11.2

@@ -9,7 +9,7 @@
 Pod::Spec.new do |s|
   s.name             = 'PKCS12'
   s.version          = '0.1.0'
-  s.summary          = 'A short description of PKCS12.'
+  s.summary          = 'PKCS12 Serialization Tools for ObjC.'
 
 # This description is used to generate tags and improve search results.
 #   * Think: What does it do? Why did you write it? What is the focus?
@@ -18,17 +18,17 @@ Pod::Spec.new do |s|
 #   * Finally, don't worry about the indent, CocoaPods strips it!
 
   s.description      = <<-DESC
-TODO: Add long description of the pod here.
+Serialize *.p12 file to X509 certficate object.
                        DESC
 
-  s.homepage         = 'https://github.com/冷秋/PKCS12'
+  s.homepage         = 'https://github.com/Magic-Unique/PKCS12'
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
-  s.author           = { '冷秋' => '516563564@qq.com' }
-  s.source           = { :git => 'https://github.com/冷秋/PKCS12.git', :tag => s.version.to_s }
+  s.author           = { 'Magic-Unique' => '516563564@qq.com' }
+  s.source           = { :git => 'https://github.com/Magic-Unique/PKCS12.git', :tag => s.version.to_s }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
-  s.ios.deployment_target = '10.0'
+  s.ios.deployment_target = '8.0'
 
   s.source_files = 'PKCS12/Classes/**/*'
   
@@ -36,7 +36,9 @@ TODO: Add long description of the pod here.
   #   'PKCS12' => ['PKCS12/Assets/*.png']
   # }
 
-  # s.public_header_files = 'Pod/Classes/**/*.h'
+  s.public_header_files = 'PKCS12/Classes/Public/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
+  s.dependency 'OpenSSL-Universal'
+
 end
