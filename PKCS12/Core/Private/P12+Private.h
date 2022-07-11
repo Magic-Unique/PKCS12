@@ -2,10 +2,11 @@
 //  P12+Private.h
 //  PKCS12
 //
-//  Created by 吴双 on 2022/6/17.
+//  Created by Magic-Unique on 2022/6/17.
 //
 
 #import "P12.h"
+#import <openssl/x509.h>
 
 @interface P12Validity ()
 @property (nonatomic, strong) NSDate *notBefore;
@@ -22,6 +23,7 @@
 
 @interface P12 ()
 
+@property (nonatomic, assign) X509 *x509Cert;
 
 @property (nonatomic, strong) P12Validity *validity;
 

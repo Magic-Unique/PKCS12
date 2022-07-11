@@ -48,4 +48,10 @@
     return [NSString stringWithFormat:@"<P12: '%@' (%@)>", self.name, self.validity.isExpired ? @"valid" : @"expired"];
 }
 
+- (void)dealloc {
+    if (_x509Cert) {
+        X509_free(_x509Cert);
+    }
+}
+
 @end

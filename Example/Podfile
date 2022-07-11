@@ -3,6 +3,7 @@ platform :ios, '8.0'
 
 target 'PKCS12_Example' do
   pod 'PKCS12', :path => '../'
+  pod 'MUFoundation/MUPath'
 
   target 'PKCS12_Tests' do
     inherit! :search_paths

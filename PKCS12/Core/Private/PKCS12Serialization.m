@@ -51,7 +51,6 @@
     STACK_OF(X509)* ca = NULL;
     BIO*bio = NULL;
     OpenSSL_add_all_algorithms();
-    SSLeay_add_all_algorithms();
     ERR_load_crypto_strings();
     
     bio = BIO_new_file([filePath UTF8String], "r");
@@ -73,8 +72,8 @@
     self.info.sha1 = [self sha1:usrCert];
     self.info.version = [self __getVersion:usrCert];
     self.info.password = password;
+    self.info.x509Cert = usrCert;
     
-    X509_free(usrCert);
     PKCS12_free(p12);
     BIO_free_all(bio);
     EVP_PKEY_free(pkey);
@@ -83,7 +82,6 @@
 - (NSString*)sha1:(X509 *)cert {
     PKCS12_SAFEBAG *safeBag = PKCS12_x5092certbag(cert);
     NSData *certData = [NSData dataWithBytes: safeBag->value.bag->value.x509cert->data   length:safeBag->value.bag->value.x509cert->length];
-    
     unsigned char sha1Buffer[CC_SHA1_DIGEST_LENGTH];
     CC_SHA1(certData.bytes, (unsigned int)certData.length, sha1Buffer);
     NSMutableString *fingerprint = [NSMutableString stringWithCapacity:CC_SHA1_DIGEST_LENGTH * 2];
@@ -109,15 +107,6 @@
     NSString *serialStr = [NSString stringWithUTF8String:res];
     return serialStr;
 }
-///证书拥有者信息
-- (NSString *)__getUserName:(X509 *)usrCert {
-    char szOutCN[256]={0};
-    X509_NAME *name = NULL;
-    name = usrCert->cert_info->subject;
-    X509_NAME_get_text_by_NID(name,NID_commonName,szOutCN,256);
-    NSString *nameStr = [NSString stringWithUTF8String:szOutCN];
-    return nameStr;
-}
 
 - (P12Organization *)__getX509NameInfo:(X509_NAME *)name {
     P12Organization *organization = [[P12Organization alloc] init];
@@ -125,14 +114,13 @@
     X509_NAME_ENTRY *name_entry;
     long Nid;
     unsigned char msginfo[1024];
-    int msginfoLen;
-    const int entriesNum = sk_X509_NAME_ENTRY_num(name->entries);
+    const int entriesNum = X509_NAME_entry_count(name);
     for (int i = 0; i < entriesNum; i++) {
-        name_entry = sk_X509_NAME_ENTRY_value(name->entries, i);
-        Nid = OBJ_obj2nid(name_entry->object);
-        msginfoLen = name_entry->value->length;
-        memcpy(msginfo,name_entry->value->data,msginfoLen);
-        msginfo[msginfoLen]='\0';
+        name_entry = X509_NAME_get_entry(name, i);
+        Nid = OBJ_obj2nid(X509_NAME_ENTRY_get_object(name_entry));
+        ASN1_STRING *data =  X509_NAME_ENTRY_get_data(name_entry);
+        memcpy(msginfo, data->data, data->length);
+        msginfo[data->length]='\0';
         NSString *entryValue = [NSString stringWithUTF8String:(const char *)msginfo];
         switch(Nid) {
             case NID_countryName:

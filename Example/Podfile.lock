@@ -1,15 +1,24 @@
 PODS:
+  - MUFoundation/MUPath (0.0.6)
   - OpenSSL-Universal (1.0.2.20):
     - OpenSSL-Universal/Static (= 1.0.2.20)
   - OpenSSL-Universal/Static (1.0.2.20)
   - PKCS12 (0.1.0):
-    - OpenSSL-Universal
+    - PKCS12/Core (= 0.1.0)
+    - PKCS12/OCSP (= 0.1.0)
+  - PKCS12/Core (0.1.0):
+    - OpenSSL-Universal (~> 1.0.2.0)
+  - PKCS12/OCSP (0.1.0):
+    - OpenSSL-Universal (~> 1.0.2.0)
+    - PKCS12/Core
 
 DEPENDENCIES:
+  - MUFoundation/MUPath
   - PKCS12 (from `../`)
 
 SPEC REPOS:
   trunk:
+    - MUFoundation
     - OpenSSL-Universal
 
 EXTERNAL SOURCES:
@@ -17,9 +26,10 @@ EXTERNAL SOURCES:
     :path: "../"
 
 SPEC CHECKSUMS:
+  MUFoundation: 7ba494a348139d1a355a3f20b5ba3de11720c9d4
   OpenSSL-Universal: ff34003318d5e1163e9529b08470708e389ffcdd
-  PKCS12: e1a3be3d1b5152a8bbe012c5cd1eaa565a93a702
+  PKCS12: 3a3fc1ada84d2322dc09870a152bd9bc3fb8dc1f
 
-PODFILE CHECKSUM: 5e879b37d2b8fe85ffc7d83271db6a9b2d97afc0
+PODFILE CHECKSUM: 6d42d5e902f494f790586f1c01cf190139cdd59a
 
 COCOAPODS: 1.11.2

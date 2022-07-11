@@ -7,16 +7,15 @@
 
 [中文](./README.cn.md)
 
-## Installation
+## 引入
 
-PKCS12 is available through [CocoaPods](https://cocoapods.org). To install
-it, simply add the following line to your Podfile:
+PKCS12 支持 [CocoaPods](https://cocoapods.org). 修改 Podfile:
 
 ```ruby
 pod 'PKCS12'
 ```
 
-## Usage
+## 使用
 
 ```objc
 #import <PKCS12/PKCS12.h>
@@ -31,15 +30,13 @@ NSLog(@"%@", cert.name);
 dispatch_async_queue(globalQueue, ^{
     BOOL isRevoked = [cert syncCheckIsRevoked]; // Power by: even-cheng/p12Checker
 });
+
+
 ```
 
-## Author
+## 作者
 
 Magic-Unique, 516563564@qq.com
-
-## Thanks
-
-[even-cheng/p12Checker](https://github.com/even-cheng/p12Checker)
 
 ## License
 

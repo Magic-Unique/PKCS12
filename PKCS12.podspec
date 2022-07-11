@@ -25,20 +25,34 @@ Serialize *.p12 file to X509 certficate object.
   # s.screenshots     = 'www.example.com/screenshots_1', 'www.example.com/screenshots_2'
   s.license          = { :type => 'MIT', :file => 'LICENSE' }
   s.author           = { 'Magic-Unique' => '516563564@qq.com' }
-  s.source           = { :git => 'https://github.com/Magic-Unique/PKCS12.git', :tag => s.version.to_s }
+  s.source           = { :git => 'https://github.com/Magic-Unique/PKCS12.git', :tag => "#{s.version}" }
   # s.social_media_url = 'https://twitter.com/<TWITTER_USERNAME>'
 
   s.ios.deployment_target = '8.0'
+  # s.osx.deployment_target = '10.10'
 
-  s.source_files = 'PKCS12/Classes/**/*'
+  s.subspec 'Core' do |ss|
+    ss.source_files = 'PKCS12/Core/**/*'
+    ss.public_header_files = 'PKCS12/Core/Public/*.h'
+    ss.dependency 'OpenSSL-Universal', '~> 1.0.2.0'
+  end
+
+  s.subspec 'OCSP' do |ss|
+    ss.source_files = 'PKCS12/OCSP/**/*'
+    ss.public_header_files = 'PKCS12/OCSP/Public/*.h'
+    ss.libraries = 'c++'
+    ss.dependency 'OpenSSL-Universal', '~> 1.0.2.0'
+    ss.dependency 'PKCS12/Core'
+  end
+
+  # s.source_files = 'PKCS12/Classes/**/*'
   
   # s.resource_bundles = {
   #   'PKCS12' => ['PKCS12/Assets/*.png']
   # }
 
-  s.public_header_files = 'PKCS12/Classes/Public/*.h'
+  # s.public_header_files = 'PKCS12/Classes/Public/*.h'
   # s.frameworks = 'UIKit', 'MapKit'
   # s.dependency 'AFNetworking', '~> 2.3'
-  s.dependency 'OpenSSL-Universal'
 
 end
